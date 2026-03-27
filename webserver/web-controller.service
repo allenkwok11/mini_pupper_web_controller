@@ -1,10 +1,12 @@
 [Unit]
 Description=Robot web web-controller service
-Requires=robot.service
-After=robot.service
+Wants=robot.service
+After=network-online.target robot.service
 
 [Service]
 ExecStart=taskset -c 0,1 /usr/local/bin/web-controller
+Restart=always
+RestartSec=2
 KillSignal=2
 TimeoutStopSec=10
 
